@@ -2,10 +2,10 @@ using Test
 using TestSetExtensions
 using LinearAlgebra
 using Qaintessent
-using QaintModels
+using Qaintmodels
 
 function isunitary(cb::Vector{CircuitGate})
-    matrix(cb) * matrix(Base.adjoint(cb)) ≈ I
+    sparse_matrix(cb) * sparse_matrix(Base.adjoint(cb)) ≈ I
 end
 
 
@@ -15,7 +15,7 @@ end
 
         Fmat = [exp(2*π*im*j*k/2^N)/sqrt(2^N) for k in 0:(2^N-1), j in 0:(2^N-1)]
 
-        @test Qaintessent.matrix(c) ≈ Fmat
+        @test Qaintessent.sparse_matrix(c) ≈ Fmat
         @test isunitary(c)
     end
 end
@@ -28,7 +28,7 @@ end
     # reference
     toffoli = circuit_gate(1, X, 3, 2)
 
-    @test Qaintessent.matrix(toffoli) ≈ Qaintessent.matrix(cgc)
+    @test Qaintessent.sparse_matrix(toffoli) ≈ Qaintessent.sparse_matrix(cgc)
 end
 
 

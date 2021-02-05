@@ -1,4 +1,4 @@
-module QaintModels
+module Qaintmodels
 
 using LinearAlgebra
 using SparseArrays

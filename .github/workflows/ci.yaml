@@ -1,0 +1,18 @@
+name: Run tests
+
+on: pull_request
+
+jobs:
+  unittests:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2  
+        with:
+          # pulls all commits (needed for lerna / semantic release to correctly version)
+          fetch-depth: "0"
+      - run: julia -e 'using Pkg; Pkg.instantiate(); Pkg.add(url="https://github.com/Qaintum/Qaintessent.jl", rev="master")'
+      - uses: julia-actions/setup-julia@latest
+      - uses: julia-actions/julia-runtest@master
+      - uses: julia-actions/julia-processcoverage@v1
+      - uses: codecov/codecov-action@v1

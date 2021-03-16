@@ -42,7 +42,7 @@ end
 
         index = b << N + a
         ψ[index+1] = 1.0
-        ψ = apply(adder, ψ)
+        ψ = apply(ψ, adder)
         answer = ((findall(x -> x == 1, ψ)[1] - 1) % (2^2N)) >> N
         @test answer == (a + b) % (2^N)
     end
@@ -63,7 +63,7 @@ end
 
         ψ[index+1] = 1.0
 
-        ψ = apply(cgc, ψ)
+        ψ = apply(ψ, cgc)
         answer = (findall(x -> x == 1, ψ)[1] - 1) >> 2N
         @test answer == a + b
     end
@@ -88,7 +88,7 @@ end
 
         ψ[index+1] = 1.0
 
-        ψ = apply(cgc, ψ)
+        ψ = apply(ψ, cgc)
         answer = ((findall(x -> x == 1, ψ)[1] - 1) >> N)
         @test answer == a + b
     end
